@@ -12,7 +12,7 @@ app.use(cors());
 app.use('/api/products', ProductRoutes);
 
 const getPController = (req: Request, res: Response) => {
-  res.send('Hello Assignment!');
+  res.send('Hello Assignment This is BackEnd Project!');
 };
 
 app.get('/', getPController);
