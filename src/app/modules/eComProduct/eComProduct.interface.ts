@@ -1,4 +1,4 @@
-import { Schema, model, connect } from 'mongoose';
+// import { Schema, model, connect } from 'mongoose';
 export type Variant = {
   type: string;
   value: string;
@@ -14,7 +14,7 @@ export type EProduct = {
   description: string;
   price: number;
   category: string;
-  tag: string[];
-  variant: Variant;
-  inventory: [Inventory];
+  tag?: string[];
+  variant: Variant[];
+  inventory: Inventory;
 };
