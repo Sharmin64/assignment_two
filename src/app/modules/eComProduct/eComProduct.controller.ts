@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { ProductService } from './eComProduct.service';
 import { productsValidationSchema } from './eComProduct.validator';
-import { date } from 'zod';
 
 const cteateProduct = async (req: Request, res: Response) => {
   try {
@@ -41,7 +40,56 @@ const getAllProducts = async (req: Request, res: Response) => {
   }
 };
 
+const getProductById = async (req: Request, res: Response) => {
+  try {
+    const { productId } = req.params;
+    const result = await ProductService.getProductById(productId);
+    if (!result) {
+      return res.status(400).json({
+        success: false,
+        message: 'Product not found',
+        data: result,
+      });
+    }
+    res.json({
+      success: true,
+      message: 'Product fetched successfully!',
+      data: result,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Something Went Wrong',
+      data: err,
+    });
+  }
+};
+
+const updateProductFromDb = async (req: Request, res: Response) => {
+  try {
+    const { productId } = req.params;
+    const data = req.body;
+    const updatedProduct = productsValidationSchema.parse(data);
+    const result = await ProductService.updateProduct(
+      productId,
+      updatedProduct,
+    );
+    res.json({
+      success: true,
+      message: 'Product updated successfully!',
+      data: result,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'something went wrong',
+      data: err,
+    });
+  }
+};
 export const ProductController = {
   cteateProduct,
   getAllProducts,
+  getProductById,
+  updateProductFromDb,
 };
