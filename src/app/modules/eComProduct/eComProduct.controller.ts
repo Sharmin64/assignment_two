@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { ProductService } from './eComProduct.service';
 import { productsValidationSchema } from './eComProduct.validator';
+import { date } from 'zod';
 
 const cteateProduct = async (req: Request, res: Response) => {
   try {
@@ -87,9 +88,28 @@ const updateProductFromDb = async (req: Request, res: Response) => {
     });
   }
 };
+
+const deleteProductFromDb = async (req: Request, res: Response) => {
+  try {
+    const { productId } = req.params;
+    await ProductService.deleteProduct(productId);
+    res.json({
+      success: true,
+      message: 'Product deleted successfully!',
+      data: null,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'something went wrong',
+      data: err,
+    });
+  }
+};
 export const ProductController = {
   cteateProduct,
   getAllProducts,
   getProductById,
   updateProductFromDb,
+  deleteProductFromDb,
 };
