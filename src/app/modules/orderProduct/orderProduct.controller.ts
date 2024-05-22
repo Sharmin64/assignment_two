@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { orerValidationSchema } from './orderProduct.validation';
 import { orderServices } from './orderProduct.service';
 
+// creating an order for user email
 const createOrder = async (req: Request, res: Response) => {
   try {
     const data = req.body;
@@ -26,7 +27,7 @@ const createOrder = async (req: Request, res: Response) => {
     });
   }
 };
-
+// getting all order for user email
 const getAllOrders = async (req: Request, res: Response) => {
   try {
     const { email } = req.query;

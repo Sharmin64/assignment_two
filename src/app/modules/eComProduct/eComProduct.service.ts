@@ -1,8 +1,8 @@
 import { EProduct } from './eComProduct.interface';
 import { Product } from './eComProduct.model';
 
-const createProductIntoDB = async (product: EProduct) => {
-  const production = await Product.create(product);
+const createProductIntoDB = async (payload: EProduct) => {
+  const production = await Product.create(payload);
   return production;
 };
 
