@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { POrder } from './orderProduct.interface';
-import { Product } from '../eComProduct.model';
+import { Product } from '../eComProduct/eComProduct.model';
 
 const orderSchema = new Schema<POrder>({
   email: {
